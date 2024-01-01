@@ -111,9 +111,9 @@ static int do_statfs_native(struct kstatfs *st, struct statfs __user *p)
 {
 	struct statfs buf;
 
-	if (sizeof(buf) == sizeof(*st))
-		memcpy(&buf, st, sizeof(*st));
-	else {
+//	if (sizeof(buf) == sizeof(*st))
+//		memcpy(&buf, st, sizeof(*st));
+//	else {
 		if (sizeof buf.f_blocks == 4) {
 			if ((st->f_blocks | st->f_bfree | st->f_bavail |
 			     st->f_bsize | st->f_frsize) &
@@ -143,7 +143,7 @@ static int do_statfs_native(struct kstatfs *st, struct statfs __user *p)
 		buf.f_frsize = st->f_frsize;
 		buf.f_flags = st->f_flags;
 		memset(buf.f_spare, 0, sizeof(buf.f_spare));
-	}
+//	}
 	if (copy_to_user(p, &buf, sizeof(buf)))
 		return -EFAULT;
 	return 0;
@@ -152,9 +152,9 @@ static int do_statfs_native(struct kstatfs *st, struct statfs __user *p)
 static int do_statfs64(struct kstatfs *st, struct statfs64 __user *p)
 {
 	struct statfs64 buf;
-	if (sizeof(buf) == sizeof(*st))
-		memcpy(&buf, st, sizeof(*st));
-	else {
+//	if (sizeof(buf) == sizeof(*st))
+//		memcpy(&buf, st, sizeof(*st));
+//	else {
 		buf.f_type = st->f_type;
 		buf.f_bsize = st->f_bsize;
 		buf.f_blocks = st->f_blocks;
@@ -167,7 +167,7 @@ static int do_statfs64(struct kstatfs *st, struct statfs64 __user *p)
 		buf.f_frsize = st->f_frsize;
 		buf.f_flags = st->f_flags;
 		memset(buf.f_spare, 0, sizeof(buf.f_spare));
-	}
+//	}
 	if (copy_to_user(p, &buf, sizeof(buf)))
 		return -EFAULT;
 	return 0;
